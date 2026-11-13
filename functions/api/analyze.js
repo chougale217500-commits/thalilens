@@ -62,21 +62,74 @@ async function validToken(key, idToken) {
   } catch { return false; }
 }
 
-async function askGemini(env, prompt, image, mediaType) {
-  const model = env.GEMINI_MODEL || "gemini-2.5-flash";
-  const parts = [];
-  if (image) parts.push({ inlineData: { mimeType: mediaType, data: image } });
-  parts.push({ text: prompt });
-  const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + encodeURIComponent(model) + ":generateContent", {
+// Google retires model names often, so the function tries a list of names in order,
+// and if none works it asks Google which models this key can use. The one that works is remembered.
+const GEMINI_API = "https://generativelanguage.googleapis.com/v1beta/";
+const GEMINI_MODELS = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite", "gemini-2.5-flash"];
+let goodModel = null;
+
+function googleError(status, body) {
+  const j = safeParse(body);
+  const e = (j && j.error) || {};
+  return { status, code: String(e.status || ""), message: String(e.message || body || "").slice(0, 200) };
+}
+const isKeyProblem = (e) => e.status === 401 || /api.?key|credential|unauthenticated/i.test(e.code + " " + e.message);
+
+async function geminiOnce(env, model, parts) {
+  const r = await fetch(GEMINI_API + "models/" + encodeURIComponent(model) + ":generateContent", {
     method: "POST",
     headers: { "content-type": "application/json", "x-goog-api-key": env.GEMINI_API_KEY },
     body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { responseMimeType: "application/json", temperature: 0.2 } }),
   });
-  if (!r.ok) return { status: r.status, detail: await r.text() };
+  if (!r.ok) return { error: googleError(r.status, await r.text()) };
   const out = await r.json();
   const cand = out.candidates && out.candidates[0];
   const text = cand && cand.content && Array.isArray(cand.content.parts) ? cand.content.parts.map((p) => p.text || "").join("") : "";
-  return { status: 200, text };
+  return { text };
+}
+
+// Lists the models this key can use and returns the newest general Flash models first.
+async function discoverModels(env) {
+  try {
+    const r = await fetch(GEMINI_API + "models?pageSize=200", { headers: { "x-goog-api-key": env.GEMINI_API_KEY } });
+    if (!r.ok) return [];
+    const j = await r.json();
+    const version = (n) => { const m = /gemini-(\d+(?:\.\d+)?)/.exec(n); return m ? parseFloat(m[1]) : 0; };
+    return (j.models || [])
+      .filter((m) => (m.supportedGenerationMethods || []).includes("generateContent"))
+      .map((m) => String(m.name || "").replace(/^models\//, ""))
+      .filter((n) => /^gemini-.*flash/.test(n) && !/image|tts|live|audio|embedding|omni|preview|exp/.test(n))
+      .sort((a, b) => version(b) - version(a) || a.length - b.length);
+  } catch { return []; }
+}
+
+async function askGemini(env, prompt, image, mediaType) {
+  const parts = [];
+  if (image) parts.push({ inlineData: { mimeType: mediaType, data: image } });
+  parts.push({ text: prompt });
+
+  const tried = new Set();
+  let last = null, limited = false;
+  const attempt = async (model) => {
+    if (!model || tried.has(model)) return null;
+    tried.add(model);
+    const r = await geminiOnce(env, model, parts);
+    if (!r.error) { goodModel = model; return { status: 200, text: r.text }; }
+    last = r.error;
+    if (r.error.status === 429) limited = true;
+    return null;
+  };
+
+  for (const model of [goodModel, env.GEMINI_MODEL, ...GEMINI_MODELS]) {
+    const ok = await attempt(model);
+    if (ok) return ok;
+    if (last && isKeyProblem(last)) return { status: 401, detail: last };
+  }
+  for (const model of (await discoverModels(env)).slice(0, 3)) {
+    const ok = await attempt(model);
+    if (ok) return ok;
+  }
+  return { status: limited ? 429 : (last ? last.status : 502), detail: last };
 }
 
 async function askAnthropic(env, prompt, image, mediaType) {
@@ -122,9 +175,14 @@ export async function onRequestPost({ request, env }) {
     const ask = env.GEMINI_API_KEY ? askGemini : askAnthropic;
     const r = await ask(env, prompt, hasPhoto ? image : null, mediaType);
     if (r.status === 429) return json({ error: "The free daily limit is used up for now. Please try again later." }, 429);
+    if (r.status === 401) {
+      console.error("AI key error", r.detail);
+      return json({ error: "The AI key was not accepted. Site owner: check GEMINI_API_KEY in Cloudflare settings." }, 502);
+    }
     if (r.status !== 200) {
       console.error("AI error", r.status, r.detail);
-      return json({ error: "The analysis service is busy. Please try again." }, 502);
+      const d = r.detail && typeof r.detail === "object" ? " (code " + r.detail.status + " " + r.detail.code + ")" : "";
+      return json({ error: "The analysis service is busy. Please try again." + d }, 502);
     }
     const start = r.text.indexOf("{"), end = r.text.lastIndexOf("}");
     const data = start >= 0 && end > start ? safeParse(r.text.slice(start, end + 1)) : null;
