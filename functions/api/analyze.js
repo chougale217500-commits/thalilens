@@ -65,8 +65,29 @@ async function validToken(key, idToken) {
 // Google retires model names often, so the function tries a list of names in order,
 // and if none works it asks Google which models this key can use. The one that works is remembered.
 const GEMINI_API = "https://generativelanguage.googleapis.com/v1beta/";
-const GEMINI_MODELS = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite", "gemini-2.5-flash"];
+const GEMINI_MODELS = ["gemini-3.6-flash", "gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-2.5-flash"];
 let goodModel = null;
+
+// Newer Gemini models "think" before answering, which is the main cause of slow replies.
+// This task does not need it, so each model is asked for the least thinking it allows.
+function thinkingFor(model) {
+  if (/^gemini-2\.5/.test(model)) return { thinkingBudget: 0 };
+  if (/flash-lite/.test(model) || /^gemini-3\.6-flash/.test(model) || /^gemini-3-flash/.test(model)) return { thinkingLevel: "minimal" };
+  return { thinkingLevel: "low" };
+}
+
+// Remembers the working model between requests, so later requests skip the names that failed.
+const MODEL_KEY = "https://thali-lens.internal/good-model";
+async function recallModel() {
+  if (goodModel || typeof caches === "undefined") return;
+  try { const r = await caches.default.match(MODEL_KEY); if (r) goodModel = (await r.text()) || null; } catch {}
+}
+async function rememberModel(model) {
+  if (goodModel === model) return;
+  goodModel = model;
+  if (typeof caches === "undefined") return;
+  try { await caches.default.put(MODEL_KEY, new Response(model, { headers: { "cache-control": "max-age=86400" } })); } catch {}
+}
 
 function googleError(status, body) {
   const j = safeParse(body);
@@ -75,13 +96,20 @@ function googleError(status, body) {
 }
 const isKeyProblem = (e) => e.status === 401 || /api.?key|credential|unauthenticated/i.test(e.code + " " + e.message);
 
-async function geminiOnce(env, model, parts) {
+async function geminiOnce(env, model, parts, lessThinking = true) {
+  const generationConfig = { responseMimeType: "application/json", temperature: 0.2 };
+  if (lessThinking) generationConfig.thinkingConfig = thinkingFor(model);
   const r = await fetch(GEMINI_API + "models/" + encodeURIComponent(model) + ":generateContent", {
     method: "POST",
     headers: { "content-type": "application/json", "x-goog-api-key": env.GEMINI_API_KEY },
-    body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { responseMimeType: "application/json", temperature: 0.2 } }),
+    body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig }),
   });
-  if (!r.ok) return { error: googleError(r.status, await r.text()) };
+  if (!r.ok) {
+    const error = googleError(r.status, await r.text());
+    // If this model does not accept the thinking setting, ask again without it.
+    if (lessThinking && r.status === 400 && /think/i.test(error.message)) return geminiOnce(env, model, parts, false);
+    return { error };
+  }
   const out = await r.json();
   const cand = out.candidates && out.candidates[0];
   const text = cand && cand.content && Array.isArray(cand.content.parts) ? cand.content.parts.map((p) => p.text || "").join("") : "";
@@ -108,13 +136,14 @@ async function askGemini(env, prompt, image, mediaType) {
   if (image) parts.push({ inlineData: { mimeType: mediaType, data: image } });
   parts.push({ text: prompt });
 
+  await recallModel();
   const tried = new Set();
   let last = null, limited = false;
   const attempt = async (model) => {
     if (!model || tried.has(model)) return null;
     tried.add(model);
     const r = await geminiOnce(env, model, parts);
-    if (!r.error) { goodModel = model; return { status: 200, text: r.text }; }
+    if (!r.error) { await rememberModel(model); return { status: 200, text: r.text }; }
     last = r.error;
     if (r.error.status === 429) limited = true;
     return null;
