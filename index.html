@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thali Lens: Indian Food Calorie and Nutrition Checker from a Photo</title>
+<meta name="description" content="Click or upload a photo of any Indian food and get the dish name, ingredients, calories, protein, carbs, fat and full nutrition in seconds. Free AI tool.">
+<link rel="canonical" href="https://YOURDOMAIN.com/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1A2125">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thali Lens">
+<meta property="og:title" content="Thali Lens: Indian Food Calorie and Nutrition Checker from a Photo">
+<meta property="og:description" content="Click or upload a photo of any Indian food and get the dish name, ingredients, calories, protein, carbs, fat and full nutrition in seconds. Free AI tool.">
+<meta property="og:url" content="https://YOURDOMAIN.com/">
+<meta property="og:image" content="https://YOURDOMAIN.com/assets/og-image.png">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thali Lens: Indian Food Calorie and Nutrition Checker from a Photo">
+<meta name="twitter:description" content="Click or upload a photo of any Indian food and get the dish name, ingredients, calories, protein, carbs, fat and full nutrition in seconds. Free AI tool.">
+<meta name="twitter:image" content="https://YOURDOMAIN.com/assets/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@500;600;700&family=Hind:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/styles.css">
+<!-- ADSENSE: after Google approves your site, paste your AdSense script here, for example:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Thali Lens", "url": "https://YOURDOMAIN.com/", "applicationCategory": "HealthApplication", "operatingSystem": "Any", "inLanguage": "en-IN", "description": "AI tool that estimates ingredients and nutrition of Indian food from one photo.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "image": "https://YOURDOMAIN.com/assets/og-image.png"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Thali Lens", "url": "https://YOURDOMAIN.com/", "logo": "https://YOURDOMAIN.com/icon-512.png"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How does Thali Lens find calories from a photo?", "acceptedAnswer": {"@type": "Answer", "text": "You upload or click one photo of your meal. An AI vision model recognises each dish, estimates the portion in katori, pieces and grams, and then estimates calories, protein, carbohydrate, fat and other nutrients for that portion."}}, {"@type": "Question", "name": "Which Indian foods can it recognise?", "acceptedAnswer": {"@type": "Answer", "text": "It works with most common home and restaurant food across India: roti, paratha, rice, dal, sabzi, paneer dishes, biryani, dosa, idli, poha, chaat, snacks, sweets and drinks such as chai and lassi. A full thali with several items in one photo also works."}}, {"@type": "Question", "name": "How accurate are the nutrition values?", "acceptedAnswer": {"@type": "Answer", "text": "They are estimates. A photo cannot show how much oil, ghee, butter or sugar was used, so real values can be higher or lower. Use the numbers as a guide, not as a lab report."}}, {"@type": "Question", "name": "Is my photo stored?", "acceptedAnswer": {"@type": "Answer", "text": "No. The photo is resized in your browser, sent once for analysis and not saved on our servers."}}, {"@type": "Question", "name": "Is Thali Lens free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The tool is free to use and is supported by advertising."}}, {"@type": "Question", "name": "Can I use it for diabetes or weight loss diet planning?", "acceptedAnswer": {"@type": "Answer", "text": "It can help you understand portion size and carbohydrate load, but it does not replace advice from your doctor or a registered dietitian."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Thali Lens home"><img src="/favicon.svg" width="36" height="36" alt=""><span>Thali <b>Lens</b></span></a>
+    <nav aria-label="Main">
+      <a href="/">Analyse</a>
+      <a href="/indian-food-calories.html">Calorie chart</a>
+      <a href="/calorie-calculator.html">Calculator</a>
+      <a href="/guides/">Guides</a>
+      <a id="authlink" class="authlink" href="/login.html">Sign in</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+<section class="hero">
+  <h1>Indian food calories and nutrition, from one photo</h1>
+  <p>Click or upload one photo of your thali, dosa, biryani or any Indian dish. Thali Lens shows the dish name, the ingredients and the full nutrition in seconds. No clear photo? Type the dish name instead.</p>
+</section>
+
+<div class="grid" id="tool">
+  <section class="panel photo" aria-label="Photo">
+    <div class="drop" id="drop" role="button" tabindex="0" aria-label="Choose a food photo">
+      <i class="k k1"></i><i class="k k2"></i><i class="k k3"></i><div class="hint"><strong>Drop a food photo</strong><br><small>or tap to choose one. You can also paste an image.</small></div>
+    </div>
+    <input type="file" id="file" accept="image/*" hidden>
+    <input type="file" id="capture" accept="image/*" capture="environment" hidden>
+      <label class="field" for="dish"><span class="label">Or type the food name</span><input type="text" id="dish" maxlength="200" autocomplete="off" placeholder="e.g. 2 aloo paratha with curd"></label>
+      <div class="try" id="try"><span>Try</span><button type="button">masala dosa</button><button type="button">2 roti, dal, sabzi</button><button type="button">chicken biryani</button></div>
+    <div class="btns">
+      <button id="cam" type="button">Take photo</button>
+      <button id="pick" type="button">Upload photo</button>
+      <button class="primary" id="go" type="button" disabled>Analyse</button>
+    </div>
+    <p class="status" id="status" role="status"></p>
+    <p class="fine">Values are estimates, not lab measurements. Hidden oil, ghee and sugar can change them a lot. Not medical advice.</p>
+  </section>
+  <section class="panel result" id="result" aria-live="polite"></section>
+</div>
+
+<section class="panel log" id="log" hidden></section>
+
+<dialog id="camdlg" aria-label="Camera">
+  <video id="video" autoplay playsinline muted></video>
+  <div class="btns">
+    <button class="primary" id="snap" type="button">Capture</button>
+    <button id="camclose" type="button">Cancel</button>
+  </div>
+</dialog>
+
+<section class="prose">
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><strong>Take or upload a photo, or type the food name.</strong> Hold the phone above the plate so every item is visible. If the photo is unclear, type what you ate, for example "2 roti and 1 katori dal". Adding the name along with a photo also improves the result.</li>
+    <li><strong>The AI reads the plate.</strong> It names each dish, estimates the portion in katori, pieces and grams, and lists the likely ingredients.</li>
+    <li><strong>Read your nutrition report.</strong> See calories, protein, carbs, fibre, sugar, fat, sodium, calcium and iron. Change the portion if you ate more or less.</li>
+  </ol>
+
+  <h2>What the report shows</h2>
+  <p>Indian meals are hard to track because one plate holds many dishes and every kitchen cooks differently. Thali Lens breaks the plate into separate items, so you can see that two phulka add about 150 kcal while one katori of paneer butter masala can add more than 300 kcal. For each item you get the portion, the ingredients and the macros. For the whole meal you get total energy, a split of calories from carbohydrate, protein and fat, and each nutrient as a share of an approximate daily reference for an adult eating about 2,000 kcal.</p>
+  <p>The report also marks the meal as vegetarian or non-vegetarian, lists common allergens such as milk, wheat gluten and nuts, and adds short notes, for example when sodium is high or protein is low.</p>
+
+  <h2>Tips for a better estimate</h2>
+  <ul>
+    <li>Keep the whole plate in the frame and avoid heavy shadows.</li>
+    <li>Place a spoon or your hand near the plate so portion size is easier to judge.</li>
+    <li>Photograph gravies before mixing them with rice.</li>
+    <li>If you know extra ghee or butter was added, treat the fat value as a minimum.</li>
+  </ul>
+  <p>Want quick numbers without a photo? See the <a href="/indian-food-calories.html">Indian food calorie chart</a> for common dishes.</p>
+
+  <h2>Guides to everyday Indian food</h2>
+  <ul class="cols"><li><a href="/guides/roti-calories.html">Roti, chapati and phulka</a></li><li><a href="/guides/rice-calories.html">Rice, pulao and khichdi</a></li><li><a href="/guides/dal-protein.html">Protein in dal</a></li><li><a href="/guides/paneer-nutrition.html">Paneer nutrition</a></li><li><a href="/guides/dosa-idli-calories.html">Dosa, idli and vada</a></li><li><a href="/guides/biryani-calories.html">Biryani</a></li><li><a href="/guides/indian-snacks-calories.html">Samosa, pakora and street snacks</a></li><li><a href="/guides/indian-sweets-calories.html">Indian sweets</a></li><li><a href="/guides/chai-and-drinks-calories.html">Chai, lassi and drinks</a></li><li><a href="/guides/high-protein-vegetarian-indian-foods.html">High-protein vegetarian foods</a></li><li><a href="/guides/balanced-indian-thali.html">A balanced 500 kcal thali</a></li><li><a href="/guides/indian-breakfast-calories.html">Indian breakfasts</a></li></ul>
+  <p>Not sure how much you should eat in a day? Try the <a href="/calorie-calculator.html">daily calorie and BMI calculator</a>.</p>
+
+  <h2>Frequently asked questions</h2>
+  <details><summary>How does Thali Lens find calories from a photo?</summary><p>You upload or click one photo of your meal. An AI vision model recognises each dish, estimates the portion in katori, pieces and grams, and then estimates calories, protein, carbohydrate, fat and other nutrients for that portion.</p></details>
+<details><summary>Which Indian foods can it recognise?</summary><p>It works with most common home and restaurant food across India: roti, paratha, rice, dal, sabzi, paneer dishes, biryani, dosa, idli, poha, chaat, snacks, sweets and drinks such as chai and lassi. A full thali with several items in one photo also works.</p></details>
+<details><summary>How accurate are the nutrition values?</summary><p>They are estimates. A photo cannot show how much oil, ghee, butter or sugar was used, so real values can be higher or lower. Use the numbers as a guide, not as a lab report.</p></details>
+<details><summary>Is my photo stored?</summary><p>No. The photo is resized in your browser, sent once for analysis and not saved on our servers.</p></details>
+<details><summary>Is Thali Lens free?</summary><p>Yes. The tool is free to use and is supported by advertising.</p></details>
+<details><summary>Can I use it for diabetes or weight loss diet planning?</summary><p>It can help you understand portion size and carbohydrate load, but it does not replace advice from your doctor or a registered dietitian.</p></details>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Thali Lens</strong> estimates nutrition for Indian food from a photo. Estimates are not medical advice.</p>
+    <nav aria-label="Footer">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="/indian-food-calories.html">Indian food calorie chart</a>
+      <a href="/calorie-calculator.html">Daily calorie calculator</a>
+      <a href="/guides/">Nutrition guides</a>
+    </nav>
+    <p class="fine">&copy; 2026 Thali Lens. All rights reserved.</p>
+  </div>
+</footer>
+<script src="/assets/app.js" defer></script>
+<script type="module" src="/assets/auth.js"></script>
+</body>
+</html>

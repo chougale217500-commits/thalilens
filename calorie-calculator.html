@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Calorie and BMI Calculator for Indian Adults | Thali Lens</title>
+<meta name="description" content="Free calculator: estimate your daily calorie needs, BMI with Asian Indian cut-offs and a protein range from your age, height, weight and activity.">
+<link rel="canonical" href="https://YOURDOMAIN.com/calorie-calculator.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1A2125">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thali Lens">
+<meta property="og:title" content="Daily Calorie and BMI Calculator for Indian Adults | Thali Lens">
+<meta property="og:description" content="Free calculator: estimate your daily calorie needs, BMI with Asian Indian cut-offs and a protein range from your age, height, weight and activity.">
+<meta property="og:url" content="https://YOURDOMAIN.com/calorie-calculator.html">
+<meta property="og:image" content="https://YOURDOMAIN.com/assets/og-image.png">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daily Calorie and BMI Calculator for Indian Adults | Thali Lens">
+<meta name="twitter:description" content="Free calculator: estimate your daily calorie needs, BMI with Asian Indian cut-offs and a protein range from your age, height, weight and activity.">
+<meta name="twitter:image" content="https://YOURDOMAIN.com/assets/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@500;600;700&family=Hind:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/styles.css">
+<!-- ADSENSE: after Google approves your site, paste your AdSense script here, for example:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is the daily calorie number calculated?", "acceptedAnswer": {"@type": "Answer", "text": "The calculator uses the Mifflin-St Jeor equation to estimate the energy your body uses at rest from your age, sex, height and weight, and multiplies it by an activity factor. The result is an estimate for maintaining your current weight."}}, {"@type": "Question", "name": "Which BMI ranges are used?", "acceptedAnswer": {"@type": "Answer", "text": "It uses the cut-offs commonly applied to Asian Indian adults: below 18.5 underweight, 18.5 to 22.9 normal, 23 to 24.9 overweight, and 25 or above obese. These are lower than the international ranges because health risks appear at a lower BMI in this population."}}, {"@type": "Question", "name": "Is the result accurate for everyone?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is a population estimate. It is not meant for children and teenagers, pregnant or breastfeeding women, athletes with high muscle mass, or people with medical conditions. They should get advice from a doctor or dietitian."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Thali Lens home"><img src="/favicon.svg" width="36" height="36" alt=""><span>Thali <b>Lens</b></span></a>
+    <nav aria-label="Main">
+      <a href="/">Analyse</a>
+      <a href="/indian-food-calories.html">Calorie chart</a>
+      <a href="/calorie-calculator.html">Calculator</a>
+      <a href="/guides/">Guides</a>
+      <a id="authlink" class="authlink" href="/login.html">Sign in</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+<section class="hero">
+  <h1>Daily calorie and BMI calculator for Indian adults</h1>
+  <p>Enter your age, height, weight and activity to estimate how many calories you need in a day, your BMI and a protein range.</p>
+</section>
+<div class="grid">
+  <form class="panel calc" id="calc" novalidate>
+    <label for="sex">Sex<select id="sex"><option value="m">Male</option><option value="f">Female</option></select></label>
+    <label for="age">Age (years)<input id="age" type="number" inputmode="numeric" min="18" max="80" placeholder="30"></label>
+    <label for="height">Height (cm)<input id="height" type="number" inputmode="decimal" min="120" max="220" placeholder="165"></label>
+    <label for="weight">Weight (kg)<input id="weight" type="number" inputmode="decimal" min="30" max="200" placeholder="65"></label>
+    <label for="activity">Daily activity<select id="activity">
+      <option value="1.2">Mostly sitting, little exercise</option>
+      <option value="1.375">Light: walking or exercise 1 to 3 days a week</option>
+      <option value="1.55">Moderate: exercise 3 to 5 days a week</option>
+      <option value="1.725">Heavy: physical job or hard training most days</option>
+    </select></label>
+    <button class="primary" type="submit">Calculate</button>
+    <p class="status" id="cstatus" role="status"></p>
+    <p class="fine">For adults aged 18 to 80. Not for pregnancy, breastfeeding or medical conditions.</p>
+  </form>
+  <section class="panel result" id="cresult" aria-live="polite">
+    <div class="label">Your result</div>
+    <p class="fine">Fill in the form and press Calculate. Your numbers appear here.</p>
+  </section>
+</div>
+<section class="prose">
+  <h2>How to use the result</h2>
+  <p>The maintenance number is the energy that keeps your weight steady at your present activity. Eating a little below it leads to slow weight loss, and eating a little above it leads to slow gain. A gap of 300 to 500 kcal a day is enough for steady change. Bigger cuts are hard to keep up and can leave you short of protein, vitamins and minerals.</p>
+  <p>To see how your meals compare, <a href="/#tool">analyse a photo of your plate</a> or check the <a href="/indian-food-calories.html">Indian food calorie chart</a>. The guide to <a href="/guides/balanced-indian-thali.html">building a balanced thali</a> shows what a 500 kcal meal looks like.</p>
+  <h2>Questions</h2>
+  <details><summary>How is the daily calorie number calculated?</summary><p>The calculator uses the Mifflin-St Jeor equation to estimate the energy your body uses at rest from your age, sex, height and weight, and multiplies it by an activity factor. The result is an estimate for maintaining your current weight.</p></details>
+<details><summary>Which BMI ranges are used?</summary><p>It uses the cut-offs commonly applied to Asian Indian adults: below 18.5 underweight, 18.5 to 22.9 normal, 23 to 24.9 overweight, and 25 or above obese. These are lower than the international ranges because health risks appear at a lower BMI in this population.</p></details>
+<details><summary>Is the result accurate for everyone?</summary><p>No. It is a population estimate. It is not meant for children and teenagers, pregnant or breastfeeding women, athletes with high muscle mass, or people with medical conditions. They should get advice from a doctor or dietitian.</p></details>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Thali Lens</strong> estimates nutrition for Indian food from a photo. Estimates are not medical advice.</p>
+    <nav aria-label="Footer">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="/indian-food-calories.html">Indian food calorie chart</a>
+      <a href="/calorie-calculator.html">Daily calorie calculator</a>
+      <a href="/guides/">Nutrition guides</a>
+    </nav>
+    <p class="fine">&copy; 2026 Thali Lens. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/assets/calc.js" defer></script>
+<script type="module" src="/assets/auth.js"></script>
+</body>
+</html>
