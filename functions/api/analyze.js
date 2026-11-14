@@ -21,16 +21,63 @@ Reply with ONLY one JSON object in exactly this shape, numbers as plain numbers:
  "items": [{"name": "", "name_hindi": "", "portion": "e.g. 1 katori", "grams": 0, "ingredients": [""], "calories": 0, "protein_g": 0, "carbs_g": 0, "fat_g": 0}],
  "total": {"saturated_fat_g": 0, "fiber_g": 0, "sugar_g": 0, "sodium_mg": 0, "cholesterol_mg": 0, "calcium_mg": 0, "iron_mg": 0},
  "allergens": ["e.g. milk, gluten (wheat), nuts"],
- "notes": ["2 or 3 short, plain health observations about this meal"]
+ "notes": ["2 or 3 short, plain health observations about this meal"],
+ "swaps": [{"instead_of": "an item or cooking habit in this meal", "try": "a lighter, realistic Indian alternative", "saves_kcal": 0}],
+ "score": 0,
+ "score_reason": "one short sentence explaining the score"
 }
-"total" covers all items together. If the input is not food, reply {"is_food": false, "reason": "what it is instead"}.`;
+"total" covers all items together. "score" is a whole number from 1 to 10 for how balanced this is as an everyday meal: protein, fibre and vegetables raise it; deep-fried food, added sugar, refined flour and a lot of fat lower it. "swaps" holds at most 2 practical swaps that fit this meal, or an empty list if the meal is already light. If the photo shows the nutrition table or label of a packaged food instead of a dish, read the label: use the product name as the item, the serving size printed on the pack as the portion, and the printed values. If the input is not food, reply {"is_food": false, "reason": "what it is instead"}.`;
 
-function buildPrompt(name, hasPhoto) {
+const LANGS = { hi: "Hindi (Devanagari script)", mr: "Marathi (Devanagari script)", gu: "Gujarati (Gujarati script)", bn: "Bengali (Bengali script)", ta: "Tamil (Tamil script)",
+  te: "Telugu (Telugu script)", kn: "Kannada (Kannada script)", ml: "Malayalam (Malayalam script)", pa: "Punjabi (Gurmukhi script)" };
+
+const FOCUS = {
+  loss: "weight loss: calorie control and foods that keep you full",
+  protein: "muscle gain: getting enough protein",
+  sugar: "watching blood sugar: carbohydrate load and added sugar",
+  heart: "heart health and blood pressure: salt, saturated fat and fried food",
+};
+const langLine = (lang, fields) => LANGS[lang] ? "\n\nWrite " + fields + " in " + LANGS[lang] + ". Keep the JSON keys in English." : "";
+
+function askPrompt(meal, question, lang) {
+  return "You are a nutrition guide who specialises in Indian food. A user analysed this meal:\n" + meal +
+    "\n\nTheir question: \"" + question + "\"\n\nAnswer in 2 to 4 short, plain sentences using the meal details. Give general food information only. " +
+    "Do not diagnose, do not mention medicines or doses, and say to check with a doctor or dietitian if the question is about a medical condition. " +
+    "If the question is not about food, nutrition or this meal, say you can only help with food questions.\n\n" +
+    "Reply with ONLY this JSON: {\"answer\": \"\"}" + langLine(lang, "the answer");
+}
+
+function recipePrompt(text, servings, lang) {
+  return "You are a nutrition analyst who specialises in Indian food. Here is a home recipe that makes " + servings + " serving(s):\n" + text +
+    "\n\nWork out the nutrition for ONE serving. Treat each ingredient as one item: its portion is the amount of that ingredient in one serving. " +
+    "If an amount is missing, assume a typical amount for this recipe and say so in notes. Count cooking oil, ghee, butter and sugar.\n\n" +
+    FORMAT.slice(FORMAT.indexOf("Reply with ONLY")) + "\nHere meal_name is the name of the dish, and every number is for one serving." +
+    langLine(lang, "meal_name, every item name, portion, allergens, notes, swaps, score_reason and reason");
+}
+
+function menuPrompt(focus, lang) {
+  return "You are a nutrition guide who specialises in Indian food. The photo shows a restaurant or canteen menu. Read the dish names on it." +
+    (FOCUS[focus] ? " The user's focus is " + FOCUS[focus] + "." : "") +
+    "\n\nReply with ONLY one JSON object in this shape:\n" +
+    "{\n \"is_menu\": true,\n \"reason\": \"\",\n \"picks\": [{\"name\": \"dish exactly as written on the menu\", \"why\": \"one short reason\", \"approx_kcal\": 0}],\n" +
+    " \"limit\": [{\"name\": \"\", \"why\": \"\", \"approx_kcal\": 0}],\n \"order_idea\": \"one balanced order for one person using dishes from this menu\",\n \"tip\": \"one practical tip for ordering here\"\n}\n" +
+    "\"picks\" holds the 3 to 5 better choices on this menu and \"limit\" the 3 to 5 heaviest ones. approx_kcal is for one typical restaurant serving. " +
+    "Use only dishes that are on the menu. If the photo is not a menu, reply {\"is_menu\": false, \"reason\": \"what it shows instead\"}." +
+    langLine(lang, "why, order_idea, tip and reason");
+}
+
+function buildPrompt(name, hasPhoto, lang, focus) {
   const intro = hasPhoto
     ? "Look at the attached photo and identify every food and drink item visible." +
       (name ? ` The user says the food is: "${name}". Trust this for what the dish is, and use the photo to judge portion size and anything else visible.` : "")
     : `There is no photo. The user typed this food description: "${name}". Identify each food and drink item in it. Where no quantity is given, assume one typical serving.`;
-  return "You are a nutrition analyst who specialises in Indian food. " + intro + "\n\n" + FORMAT;
+  const hindi = LANGS[lang]
+    ? "\n\nWrite meal_name, every item name, portion, ingredients, allergens, notes, swaps and reason in " + LANGS[lang] + ". Keep name_hindi in Hindi, and keep the JSON keys and the values of diet and confidence in English."
+    : "";
+  const focusLine = FOCUS[focus]
+    ? "\n\nThe user's focus is " + FOCUS[focus] + ". Make the notes and swaps relevant to it, and add one more key, \"focus_note\": one or two plain sentences on how this meal fits that focus. Give food information only; do not mention medicines."
+    : "";
+  return "You are a nutrition analyst who specialises in Indian food. " + intro + "\n\n" + FORMAT + focusLine + hindi.replace("swaps and reason", "swaps, score_reason, focus_note and reason");
 }
 
 const json = (obj, status = 200) =>
@@ -175,6 +222,8 @@ async function askAnthropic(env, prompt, image, mediaType) {
   return { status: 200, text: (out.content || []).filter((b) => b.type === "text").map((b) => b.text).join("") };
 }
 
+const clean = (v, max) => (typeof v === "string" ? v.replace(/["\r]/g, " ").trim().slice(0, max) : "");
+
 export async function onRequestPost({ request, env }) {
   if (!env.GEMINI_API_KEY && !env.ANTHROPIC_API_KEY) return json({ error: "Server is not configured yet." }, 500);
 
@@ -187,11 +236,12 @@ export async function onRequestPost({ request, env }) {
   }
 
   const body = safeParse(await request.text()) || {};
+  const mode = ["ask", "recipe", "menu"].includes(body.mode) ? body.mode : "analyse";
+  const lang = typeof body.lang === "string" ? body.lang.slice(0, 2) : "en";
+  const focus = typeof body.focus === "string" ? body.focus : "";
   const image = body.image, mediaType = body.mediaType;
-  const name = typeof body.name === "string" ? body.name.replace(/["\n\r]/g, " ").trim().slice(0, 200) : "";
   const hasPhoto = image != null && image !== "";
 
-  if (!hasPhoto && !name) return json({ error: "Please add a photo or type the food name." }, 400);
   if (hasPhoto) {
     if (typeof image !== "string" || image.length < 100 || image.length > 4000000 || !/^[A-Za-z0-9+/=]+$/.test(image)) {
       return json({ error: "Please send a valid photo." }, 400);
@@ -199,10 +249,27 @@ export async function onRequestPost({ request, env }) {
     if (!["image/jpeg", "image/png", "image/webp"].includes(mediaType)) return json({ error: "Unsupported image type." }, 400);
   }
 
+  let prompt, useImage = false;
+  if (mode === "ask") {
+    const question = clean(body.question, 300), meal = clean(body.meal, 1500);
+    if (!question || !meal) return json({ error: "Please type a question about your meal." }, 400);
+    prompt = askPrompt(meal, question, lang);
+  } else if (mode === "recipe") {
+    const text = clean(body.text, 2500), servings = Math.min(50, Math.max(1, Math.round(Number(body.servings)) || 1));
+    if (text.length < 10) return json({ error: "Please paste the ingredients with amounts." }, 400);
+    prompt = recipePrompt(text, servings, lang);
+  } else if (mode === "menu") {
+    if (!hasPhoto) return json({ error: "Please add a photo of the menu." }, 400);
+    prompt = menuPrompt(focus, lang); useImage = true;
+  } else {
+    const name = clean(body.name, 200).replace(/\n/g, " ");
+    if (!hasPhoto && !name) return json({ error: "Please add a photo or type the food name." }, 400);
+    prompt = buildPrompt(name, hasPhoto, lang, focus); useImage = hasPhoto;
+  }
+
   try {
-    const prompt = buildPrompt(name, hasPhoto);
     const ask = env.GEMINI_API_KEY ? askGemini : askAnthropic;
-    const r = await ask(env, prompt, hasPhoto ? image : null, mediaType);
+    const r = await ask(env, prompt, useImage ? image : null, mediaType);
     if (r.status === 429) return json({ error: "The free daily limit is used up for now. Please try again later." }, 429);
     if (r.status === 401) {
       console.error("AI key error", r.detail);

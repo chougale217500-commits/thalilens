@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indian Recipe Nutrition Calculator: Calories per Serving | Thali Lens</title>
+<meta name="description" content="Paste the ingredients of any home recipe and get calories, protein, carbs and fat per serving, with an ingredient-wise breakdown. Free, for Indian cooking.">
+<link rel="canonical" href="https://thalilens.pages.dev/recipe-nutrition-calculator.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1A2125">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thali Lens">
+<meta property="og:title" content="Indian Recipe Nutrition Calculator: Calories per Serving | Thali Lens">
+<meta property="og:description" content="Paste the ingredients of any home recipe and get calories, protein, carbs and fat per serving, with an ingredient-wise breakdown. Free, for Indian cooking.">
+<meta property="og:url" content="https://thalilens.pages.dev/recipe-nutrition-calculator.html">
+<meta property="og:image" content="https://thalilens.pages.dev/assets/og-image.png">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Indian Recipe Nutrition Calculator: Calories per Serving | Thali Lens">
+<meta name="twitter:description" content="Paste the ingredients of any home recipe and get calories, protein, carbs and fat per serving, with an ingredient-wise breakdown. Free, for Indian cooking.">
+<meta name="twitter:image" content="https://thalilens.pages.dev/assets/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@500;600;700&family=Hind:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/styles.css">
+<!-- ADSENSE: after Google approves your site, paste your AdSense script here, for example:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I enter a recipe?", "acceptedAnswer": {"@type": "Answer", "text": "Write one ingredient per line with its amount, for example \"1 cup toor dal\" or \"2 tsp ghee\". Then enter how many servings the recipe makes."}}, {"@type": "Question", "name": "Are the results exact?", "acceptedAnswer": {"@type": "Answer", "text": "No. They are estimates based on typical values for each ingredient. Brands, the size of your cup and how much oil is absorbed all change the result."}}, {"@type": "Question", "name": "Can I use Hindi names for ingredients?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Names such as atta, besan, jeera, haldi and paneer work, and you can write in Hindi or English."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Thali Lens home"><img src="/favicon.svg" width="36" height="36" alt=""><span>Thali <b>Lens</b></span></a>
+    <nav aria-label="Main">
+      <a href="/">Analyse</a>
+      <a href="/indian-food-calories.html">Calorie chart</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/guides/">Guides</a>
+      <a href="/hi/" lang="hi">हिंदी</a>
+      <a id="authlink" class="authlink" href="/login.html">Sign in</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+<section class="hero">
+  <h1>Recipe nutrition calculator for Indian cooking</h1>
+  <p>Paste your ingredients with amounts, say how many servings it makes, and get the nutrition for one serving with an ingredient-wise breakdown.</p>
+</section>
+<div class="grid">
+  <form class="panel calc" id="recipeform" novalidate>
+    <label for="rtext">Ingredients, one per line<textarea id="rtext" rows="9" maxlength="2500" placeholder="1 cup toor dal&#10;2 tsp ghee&#10;1 tomato&#10;1 onion&#10;1 tsp jeera&#10;salt, haldi, red chilli"></textarea></label>
+    <label for="rserv">Number of servings<input id="rserv" type="number" inputmode="numeric" min="1" max="50" value="4"></label>
+    <button class="primary" type="submit">Calculate nutrition</button>
+    <p class="status" id="rstatus" role="status"></p>
+    <p class="fine">Values are estimates. Not medical advice.</p>
+  </form>
+  <section class="panel result" id="rresult" aria-live="polite">
+    <div class="label">Per serving</div>
+    <p class="fine">Paste a recipe and press Calculate. The nutrition for one serving appears here.</p>
+  </section>
+</div>
+<section class="prose">
+  <h2>Why calculate a recipe</h2>
+  <p>A photo shows what is on the plate. A recipe shows what went into the pot. If you cook the same dal, sabzi or kheer every week, working it out once from the ingredients gives you a number you can reuse, and it shows exactly how much the ghee, oil and sugar add.</p>
+  <p>To check a cooked plate, use the <a href="/#tool">photo analyser</a>. For quick numbers, see the <a href="/indian-food-calories.html">calorie chart</a>.</p>
+  <h2>Questions</h2>
+  <details><summary>How do I enter a recipe?</summary><p>Write one ingredient per line with its amount, for example "1 cup toor dal" or "2 tsp ghee". Then enter how many servings the recipe makes.</p></details>
+<details><summary>Are the results exact?</summary><p>No. They are estimates based on typical values for each ingredient. Brands, the size of your cup and how much oil is absorbed all change the result.</p></details>
+<details><summary>Can I use Hindi names for ingredients?</summary><p>Yes. Names such as atta, besan, jeera, haldi and paneer work, and you can write in Hindi or English.</p></details>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Thali Lens</strong> estimates nutrition for Indian food from a photo. Estimates are not medical advice.</p>
+    <nav aria-label="Footer">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="/indian-food-calories.html">Indian food calorie chart</a>
+      <a href="/tools.html">All tools</a>
+      <a href="/calorie-calculator.html">Daily calorie calculator</a>
+      <a href="/calories-burned-calculator.html">Calories burned calculator</a>
+      <a href="/guides/">Nutrition guides</a>
+    </nav>
+    <p class="fine">&copy; 2026 Thali Lens. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/assets/tools.js" defer></script>
+<script type="module" src="/assets/auth.js"></script>
+</body>
+</html>

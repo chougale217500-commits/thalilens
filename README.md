@@ -26,6 +26,13 @@ Dhyan rakho:
 |---|---|
 | `index.html` | Home page + analyser (upload, camera, drag-drop, paste, food name) |
 | `indian-food-calories.html` | 28 Indian dishes ka calorie chart (content page) |
+| `food/` | 28 dishes ke alag pages ("masala dosa calories" jaisi searches ke liye) |
+| `hi/` | Hindi home page; analyser ka result bhi Hindi me aata hai |
+| `calories-burned-calculator.html`, `assets/burn.js` | Calories burned calculator (walking, running, yoga wagairah) |
+| `tools.html` | Saare tools ka ek page |
+| `recipe-nutrition-calculator.html`, `menu-scanner.html`, `assets/tools.js` | Recipe se nutrition, aur restaurant menu ki photo se behtar dishes |
+| `barcode-scanner.html`, `assets/barcode.js` | Packet ka barcode scan (Open Food Facts database, free) |
+| `compare-foods.html`, `assets/compare.js` | Do foods ki tulna |
 | `guides/` | 12 nutrition articles + unka index page (AdSense aur Google search ke liye content) |
 | `calorie-calculator.html`, `assets/calc.js` | Daily calorie + BMI calculator (bina AI ke chalta hai, koi limit nahi) |
 | `_headers` | Cloudflare Pages ke security aur cache headers |
@@ -38,7 +45,8 @@ Dhyan rakho:
 
 ## Live karne ke steps
 
-1. **Domain ka naam badlo:** sab files me `YOURDOMAIN.com` ko apne domain se replace karo
+1. **Domain ka naam:** abhi sab pages me site ka pata `https://thalilens.pages.dev` likha hai.
+   Apna domain kharidne ke baad sab files me `thalilens.pages.dev` ko naye domain se replace karo
    (VS Code me Ctrl+Shift+H). `contact@YOURDOMAIN.com` ki jagah apna asli email likho.
 2. **Gemini API key lo (free):** aistudio.google.com par Google account se login karo aur
    "Get API key" se key banao. Billing mat jodo, to paise nahi katenge.
@@ -53,7 +61,7 @@ Dhyan rakho:
 5. **Google login chalu karo** (neeche wala section).
 6. **Test karo:** site kholo, login karo, photo se aur naam se analyse karke dekho.
 7. **Google Search Console:** search.google.com/search-console me domain add karo aur
-   `https://YOURDOMAIN.com/sitemap.xml` submit karo.
+   `https://thalilens.pages.dev/sitemap.xml` submit karo (domain lene ke baad naye domain wala).
 8. **AdSense apply karo:** adsense.google.com par site add karo. Jo script mile use har HTML
    file ke `<head>` me `ADSENSE` comment ki jagah paste karo.
 9. **Approval ke baad:** `ads.txt` me AdSense ki di hui line daalo.

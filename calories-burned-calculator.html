@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calories Burned Calculator: Walking, Running, Yoga and More | Thali Lens</title>
+<meta name="description" content="Free calculator: estimate calories burned by walking, running, cycling, yoga, skipping and 10 other activities from your weight and time, with Indian food equivalents.">
+<link rel="canonical" href="https://thalilens.pages.dev/calories-burned-calculator.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1A2125">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thali Lens">
+<meta property="og:title" content="Calories Burned Calculator: Walking, Running, Yoga and More | Thali Lens">
+<meta property="og:description" content="Free calculator: estimate calories burned by walking, running, cycling, yoga, skipping and 10 other activities from your weight and time, with Indian food equivalents.">
+<meta property="og:url" content="https://thalilens.pages.dev/calories-burned-calculator.html">
+<meta property="og:image" content="https://thalilens.pages.dev/assets/og-image.png">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calories Burned Calculator: Walking, Running, Yoga and More | Thali Lens">
+<meta name="twitter:description" content="Free calculator: estimate calories burned by walking, running, cycling, yoga, skipping and 10 other activities from your weight and time, with Indian food equivalents.">
+<meta name="twitter:image" content="https://thalilens.pages.dev/assets/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@500;600;700&family=Hind:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/styles.css">
+<!-- ADSENSE: after Google approves your site, paste your AdSense script here, for example:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How are calories burned calculated?", "acceptedAnswer": {"@type": "Answer", "text": "The calculator multiplies a standard intensity value for the activity, called MET, by your body weight in kg and the time in hours. One MET is the energy your body uses at rest."}}, {"@type": "Question", "name": "Why does a heavier person burn more?", "acceptedAnswer": {"@type": "Answer", "text": "Moving a heavier body takes more energy, so the same walk uses more calories for a person of 80 kg than for a person of 55 kg."}}, {"@type": "Question", "name": "How accurate is it?", "acceptedAnswer": {"@type": "Answer", "text": "It is an estimate. Fitness, speed, terrain and age change the real number, and fitness bands often show different values. Use it to compare activities, not as an exact count."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Thali Lens home"><img src="/favicon.svg" width="36" height="36" alt=""><span>Thali <b>Lens</b></span></a>
+    <nav aria-label="Main">
+      <a href="/">Analyse</a>
+      <a href="/indian-food-calories.html">Calorie chart</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/guides/">Guides</a>
+      <a href="/hi/" lang="hi">हिंदी</a>
+      <a id="authlink" class="authlink" href="/login.html">Sign in</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+<section class="hero">
+  <h1>Calories burned calculator</h1>
+  <p>Choose an activity, enter your weight and the time, and see roughly how many calories you used and what that equals in everyday Indian food.</p>
+</section>
+<div class="grid">
+  <form class="panel calc" id="burn" novalidate>
+    <label for="act">Activity<select id="act"><option value="3.0">Walking, normal pace</option><option value="4.3" selected>Brisk walking</option><option value="7.0">Jogging</option><option value="8.3">Running, 8 km/h</option><option value="4.0">Cycling, easy</option><option value="6.8">Cycling, moderate</option><option value="2.5">Yoga</option><option value="3.5">Strength training</option><option value="11.0">Skipping rope</option><option value="6.0">Swimming, easy</option><option value="5.0">Dancing</option><option value="5.5">Badminton, casual</option><option value="4.8">Cricket</option><option value="8.0">Climbing stairs</option><option value="3.3">House cleaning</option></select></label>
+    <label for="bw">Your weight (kg)<input id="bw" type="number" inputmode="decimal" min="30" max="200" placeholder="65"></label>
+    <label for="mins">Time (minutes)<input id="mins" type="number" inputmode="numeric" min="1" max="600" placeholder="30"></label>
+    <button class="primary" type="submit">Calculate</button>
+    <p class="status" id="bstatus" role="status"></p>
+    <p class="fine">Estimates for adults. Check with a doctor before starting hard exercise if you have a health condition.</p>
+  </form>
+  <section class="panel result" id="bresult" aria-live="polite">
+    <div class="label">Your result</div>
+    <p class="fine">Fill in the form and press Calculate. Your numbers appear here.</p>
+  </section>
+</div>
+<section class="prose">
+  <h2>Food and exercise together</h2>
+  <p>The food comparison shows scale, not a rule. A samosa is about 250 kcal, which takes most people close to an hour of brisk walking to use. It is far easier to eat calories than to burn them, so the plate matters at least as much as the workout. Exercise still does things food cannot: it protects the heart, muscles, sleep and mood.</p>
+  <p>To see what is on your plate, <a href="/#tool">analyse a photo of your meal</a>. To find how much you need in a day, use the <a href="/calorie-calculator.html">daily calorie and BMI calculator</a>.</p>
+  <h2>Questions</h2>
+  <details><summary>How are calories burned calculated?</summary><p>The calculator multiplies a standard intensity value for the activity, called MET, by your body weight in kg and the time in hours. One MET is the energy your body uses at rest.</p></details>
+<details><summary>Why does a heavier person burn more?</summary><p>Moving a heavier body takes more energy, so the same walk uses more calories for a person of 80 kg than for a person of 55 kg.</p></details>
+<details><summary>How accurate is it?</summary><p>It is an estimate. Fitness, speed, terrain and age change the real number, and fitness bands often show different values. Use it to compare activities, not as an exact count.</p></details>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Thali Lens</strong> estimates nutrition for Indian food from a photo. Estimates are not medical advice.</p>
+    <nav aria-label="Footer">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="/indian-food-calories.html">Indian food calorie chart</a>
+      <a href="/tools.html">All tools</a>
+      <a href="/calorie-calculator.html">Daily calorie calculator</a>
+      <a href="/calories-burned-calculator.html">Calories burned calculator</a>
+      <a href="/guides/">Nutrition guides</a>
+    </nav>
+    <p class="fine">&copy; 2026 Thali Lens. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/assets/burn.js" defer></script>
+<script type="module" src="/assets/auth.js"></script>
+</body>
+</html>

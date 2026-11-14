@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barcode Scanner for Packaged Food: Sugar, Salt and Fat | Thali Lens</title>
+<meta name="description" content="Scan or type the barcode on a packet of biscuits, namkeen, noodles or a drink to see calories, sugar, salt, fat and how processed it is. Free, no app.">
+<link rel="canonical" href="https://thalilens.pages.dev/barcode-scanner.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1A2125">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thali Lens">
+<meta property="og:title" content="Barcode Scanner for Packaged Food: Sugar, Salt and Fat | Thali Lens">
+<meta property="og:description" content="Scan or type the barcode on a packet of biscuits, namkeen, noodles or a drink to see calories, sugar, salt, fat and how processed it is. Free, no app.">
+<meta property="og:url" content="https://thalilens.pages.dev/barcode-scanner.html">
+<meta property="og:image" content="https://thalilens.pages.dev/assets/og-image.png">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Barcode Scanner for Packaged Food: Sugar, Salt and Fat | Thali Lens">
+<meta name="twitter:description" content="Scan or type the barcode on a packet of biscuits, namkeen, noodles or a drink to see calories, sugar, salt, fat and how processed it is. Free, no app.">
+<meta name="twitter:image" content="https://thalilens.pages.dev/assets/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@500;600;700&family=Hind:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/styles.css">
+<!-- ADSENSE: after Google approves your site, paste your AdSense script here, for example:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where does the product information come from?", "acceptedAnswer": {"@type": "Answer", "text": "From Open Food Facts, a free database of packaged foods built by volunteers around the world. Not every Indian product is in it yet."}}, {"@type": "Question", "name": "What if my product is not found?", "acceptedAnswer": {"@type": "Answer", "text": "Take a photo of the nutrition table on the pack and use the photo analyser on the home page. It reads the label for you."}}, {"@type": "Question", "name": "What do low, medium and high mean?", "acceptedAnswer": {"@type": "Answer", "text": "They compare sugar, fat, saturated fat and salt per 100 g with widely used front-of-pack label thresholds for foods. Drinks use lower thresholds, so read drinks with care."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Thali Lens home"><img src="/favicon.svg" width="36" height="36" alt=""><span>Thali <b>Lens</b></span></a>
+    <nav aria-label="Main">
+      <a href="/">Analyse</a>
+      <a href="/indian-food-calories.html">Calorie chart</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/guides/">Guides</a>
+      <a href="/hi/" lang="hi">हिंदी</a>
+      <a id="authlink" class="authlink" href="/login.html">Sign in</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+<section class="hero">
+  <h1>Barcode scanner for packaged food</h1>
+  <p>Scan the barcode on a packet, or type the number printed under it, to see what is inside: calories, sugar, salt, fat and how processed the product is.</p>
+</section>
+<div class="grid">
+  <form class="panel calc" id="bcform" novalidate>
+    <label for="bc">Barcode number<input id="bc" type="text" inputmode="numeric" maxlength="14" placeholder="e.g. 8901063010031" autocomplete="off"></label>
+    <div class="btns"><button id="bscan" type="button" hidden>Scan with camera</button><button class="primary" type="submit">Look up</button></div>
+    <p class="status" id="bcstatus" role="status"></p>
+    <p class="fine">Product data comes from Open Food Facts and can be incomplete or out of date. Always check the pack.</p>
+  </form>
+  <section class="panel result" id="bcresult" aria-live="polite">
+    <div class="label">Product</div>
+    <p class="fine">Scan or type a barcode and press Look up. The product details appear here.</p>
+  </section>
+</div>
+<dialog id="bdlg" aria-label="Barcode camera">
+  <video id="bvideo" autoplay playsinline muted></video>
+  <div class="btns"><button id="bclose" type="button">Cancel</button></div>
+</dialog>
+<section class="prose">
+  <h2>Reading a packet in ten seconds</h2>
+  <p>The front of a packet is advertising. The back is information. Three numbers per 100 g tell most of the story: sugar, salt and saturated fat. This tool pulls them out and marks each as low, medium or high.</p>
+  <p>Product data: <a href="https://world.openfoodfacts.org" rel="noopener">Open Food Facts</a>, available under the Open Database Licence.</p>
+  <h2>Questions</h2>
+  <details><summary>Where does the product information come from?</summary><p>From Open Food Facts, a free database of packaged foods built by volunteers around the world. Not every Indian product is in it yet.</p></details>
+<details><summary>What if my product is not found?</summary><p>Take a photo of the nutrition table on the pack and use the photo analyser on the home page. It reads the label for you.</p></details>
+<details><summary>What do low, medium and high mean?</summary><p>They compare sugar, fat, saturated fat and salt per 100 g with widely used front-of-pack label thresholds for foods. Drinks use lower thresholds, so read drinks with care.</p></details>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Thali Lens</strong> estimates nutrition for Indian food from a photo. Estimates are not medical advice.</p>
+    <nav aria-label="Footer">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="/indian-food-calories.html">Indian food calorie chart</a>
+      <a href="/tools.html">All tools</a>
+      <a href="/calorie-calculator.html">Daily calorie calculator</a>
+      <a href="/calories-burned-calculator.html">Calories burned calculator</a>
+      <a href="/guides/">Nutrition guides</a>
+    </nav>
+    <p class="fine">&copy; 2026 Thali Lens. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/assets/barcode.js" defer></script>
+<script type="module" src="/assets/auth.js"></script>
+</body>
+</html>

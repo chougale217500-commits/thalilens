@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurant Menu Scanner: Find the Better Picks | Thali Lens</title>
+<meta name="description" content="Photograph a restaurant or canteen menu and see which Indian dishes are the better picks, which are the heaviest, and a balanced order for one person.">
+<link rel="canonical" href="https://thalilens.pages.dev/menu-scanner.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1A2125">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thali Lens">
+<meta property="og:title" content="Restaurant Menu Scanner: Find the Better Picks | Thali Lens">
+<meta property="og:description" content="Photograph a restaurant or canteen menu and see which Indian dishes are the better picks, which are the heaviest, and a balanced order for one person.">
+<meta property="og:url" content="https://thalilens.pages.dev/menu-scanner.html">
+<meta property="og:image" content="https://thalilens.pages.dev/assets/og-image.png">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Restaurant Menu Scanner: Find the Better Picks | Thali Lens">
+<meta name="twitter:description" content="Photograph a restaurant or canteen menu and see which Indian dishes are the better picks, which are the heaviest, and a balanced order for one person.">
+<meta name="twitter:image" content="https://thalilens.pages.dev/assets/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@500;600;700&family=Hind:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/styles.css">
+<!-- ADSENSE: after Google approves your site, paste your AdSense script here, for example:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What kind of photo works?", "acceptedAnswer": {"@type": "Answer", "text": "A clear, straight photo of one page of the menu with readable dish names. If the menu is long, take one photo per page."}}, {"@type": "Question", "name": "How does it choose the better picks?", "acceptedAnswer": {"@type": "Answer", "text": "It looks at how each dish is usually cooked: grilled, steamed and dal or vegetable dishes rank above deep-fried and cream-based ones. The calories are rough values for a typical restaurant serving."}}, {"@type": "Question", "name": "Does it know this restaurant's recipes?", "acceptedAnswer": {"@type": "Answer", "text": "No. It only reads the dish names. The same dish can be much heavier in one restaurant than another."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Thali Lens home"><img src="/favicon.svg" width="36" height="36" alt=""><span>Thali <b>Lens</b></span></a>
+    <nav aria-label="Main">
+      <a href="/">Analyse</a>
+      <a href="/indian-food-calories.html">Calorie chart</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/guides/">Guides</a>
+      <a href="/hi/" lang="hi">हिंदी</a>
+      <a id="authlink" class="authlink" href="/login.html">Sign in</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+<section class="hero">
+  <h1>Restaurant menu scanner</h1>
+  <p>Take a photo of the menu before you order. The scanner reads the dish names and shows the better picks, the heaviest dishes and one balanced order.</p>
+</section>
+<div class="grid">
+  <form class="panel calc" id="menuform" novalidate>
+    <img id="mpreview" alt="Your menu photo" hidden>
+    <input type="file" id="mfile" accept="image/*" hidden>
+    <input type="file" id="mcap" accept="image/*" capture="environment" hidden>
+    <div class="btns"><button id="mcam" type="button">Take photo</button><button id="mpick" type="button">Upload photo</button></div>
+    <label for="mfocus">My focus<select id="mfocus"><option value="">General</option><option value="loss">Weight loss</option><option value="protein">Muscle gain, more protein</option><option value="sugar">Watching blood sugar</option><option value="heart">Heart and blood pressure</option></select></label>
+    <button class="primary" id="mgo" type="submit" disabled>Scan menu</button>
+    <p class="status" id="mstatus" role="status"></p>
+    <p class="fine">Calories are rough values for typical restaurant servings. Not medical advice.</p>
+  </form>
+  <section class="panel result" id="mresult" aria-live="polite">
+    <div class="label">Your picks</div>
+    <p class="fine">Add a photo of a menu and press Scan menu. Your picks appear here.</p>
+  </section>
+</div>
+<section class="prose">
+  <h2>Ordering well when eating out</h2>
+  <p>Restaurant food is usually heavier than home food because of extra butter, cream and oil. You do not have to avoid eating out. Choosing a tandoori or dal dish over a cream gravy, and roti over butter naan, often saves more than 300 kcal in one meal.</p>
+  <p>After the food arrives, you can <a href="/#tool">analyse a photo of your plate</a> for the actual portion.</p>
+  <h2>Questions</h2>
+  <details><summary>What kind of photo works?</summary><p>A clear, straight photo of one page of the menu with readable dish names. If the menu is long, take one photo per page.</p></details>
+<details><summary>How does it choose the better picks?</summary><p>It looks at how each dish is usually cooked: grilled, steamed and dal or vegetable dishes rank above deep-fried and cream-based ones. The calories are rough values for a typical restaurant serving.</p></details>
+<details><summary>Does it know this restaurant's recipes?</summary><p>No. It only reads the dish names. The same dish can be much heavier in one restaurant than another.</p></details>
+</section>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Thali Lens</strong> estimates nutrition for Indian food from a photo. Estimates are not medical advice.</p>
+    <nav aria-label="Footer">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="/indian-food-calories.html">Indian food calorie chart</a>
+      <a href="/tools.html">All tools</a>
+      <a href="/calorie-calculator.html">Daily calorie calculator</a>
+      <a href="/calories-burned-calculator.html">Calories burned calculator</a>
+      <a href="/guides/">Nutrition guides</a>
+    </nav>
+    <p class="fine">&copy; 2026 Thali Lens. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/assets/tools.js" defer></script>
+<script type="module" src="/assets/auth.js"></script>
+</body>
+</html>
