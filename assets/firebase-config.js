@@ -1,10 +1,10 @@
 // Paste your Firebase web app config here.
 // Firebase console > Project settings > General > Your apps > Web app > SDK setup and configuration.
 export const firebaseConfig = {
-  apiKey: "PASTE_API_KEY",
-  authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
-  projectId: "PASTE_PROJECT_ID",
-  appId: "PASTE_APP_ID",
+  apiKey: "AIzaSyDtP3ALuVlqrghgyxlyjdUrVo0KChmTeRk",
+  authDomain: "thalilens-10650.firebaseapp.com",
+  projectId: "thalilens-10650",
+  appId: "1:887412901365:web:b7a8102f3537c4bbf38cbc",
 };
 
 // true: visitors must sign in before they can analyse food.
